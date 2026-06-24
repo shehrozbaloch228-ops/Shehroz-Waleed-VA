@@ -41,7 +41,8 @@
             premium: "0 24px 70px rgba(0,0,0,0.45)",
             premiumSoft: "0 10px 30px rgba(0,0,0,0.28)",
             glow: "0 0 0 1px rgba(0,179,126,0.18), 0 20px 60px rgba(0,179,126,0.12)",
-            glass: "inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 60px rgba(0,0,0,0.26)"
+            glass: "inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 60px rgba(0,0,0,0.26)",
+            modal: "0 30px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1)"
           },
           borderRadius: {
             "3xl": "24px",
@@ -90,19 +91,6 @@
             cardDrift: {
               "0%,100%": { transform: "translateY(0px) rotate(0deg)" },
               "50%": { transform: "translateY(-8px) rotate(-0.75deg)" }
-            },
-            blobMove: {
-              "0%,100%": { transform: "translate3d(0,0,0) scale(1)" },
-              "33%": { transform: "translate3d(24px,-18px,0) scale(1.06)" },
-              "66%": { transform: "translate3d(-18px,22px,0) scale(0.98)" }
-            },
-            hoverGlow: {
-              "0%,100%": { filter: "drop-shadow(0 0 0 rgba(0,179,126,0))" },
-              "50%": { filter: "drop-shadow(0 0 24px rgba(0,179,126,0.16))" }
-            },
-            textRise: {
-              "0%": { opacity: "0", transform: "translateY(24px)" },
-              "100%": { opacity: "1", transform: "translateY(0)" }
             }
           },
           animation: {
@@ -115,9 +103,7 @@
             pulseSoft: "pulseSoft 3.5s ease-in-out infinite",
             gridGlow: "gridGlow 6s ease-in-out infinite",
             slowRotate: "slowRotate 28s linear infinite",
-            cardDrift: "cardDrift 7s ease-in-out infinite",
-            blobMove: "blobMove 16s ease-in-out infinite",
-            hoverGlow: "hoverGlow 4s ease-in-out infinite"
+            cardDrift: "cardDrift 7s ease-in-out infinite"
           }
         }
       }
@@ -392,6 +378,12 @@
       transform: scale(1.2);
       background: #11D092;
     }
+    /* Custom Scrollbar for Ledger / Modal */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0b0f14; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,179,126,0.4); }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.001ms !important;
@@ -415,18 +407,21 @@
         <span class="text-[15px] font-semibold tracking-[-0.02em] text-white">Shehroz Waleed</span>
       </a>
 
-      <nav class="hidden items-center gap-8 md:flex">
-        <a href="#about" class="nav-link text-[14px] font-medium">About</a>
-        <a href="#competencies" class="nav-link text-[14px] font-medium">Capabilities</a>
-        <a href="#retainers" class="nav-link text-[14px] font-medium">Models</a>
-        <a href="#dashboard" class="nav-link text-[14px] font-medium">Dashboard</a>
-        <a href="#calculator" class="nav-link text-[14px] font-medium">Calculator</a>
-        <a href="#contact" class="nav-link text-[14px] font-medium">Contact</a>
+      <nav class="hidden items-center gap-6 xl:gap-8 md:flex">
+        <a href="#about" class="nav-link text-[13px] xl:text-[14px] font-medium">About</a>
+        <a href="#competencies" class="nav-link text-[13px] xl:text-[14px] font-medium">Capabilities</a>
+        <a href="#case-studies" class="nav-link text-[13px] xl:text-[14px] font-medium">Case Studies</a>
+        <a href="#retainers" class="nav-link text-[13px] xl:text-[14px] font-medium">Models</a>
+        <a href="#dashboard" class="nav-link text-[13px] xl:text-[14px] font-medium">Dashboard</a>
+        <a href="#tech-stack" class="nav-link text-[13px] xl:text-[14px] font-medium">Tech Stack</a>
+        <a href="#sops" class="nav-link text-[13px] xl:text-[14px] font-medium">SOPs</a>
+        <a href="#calculator" class="nav-link text-[13px] xl:text-[14px] font-medium">Calculator</a>
+        <a href="#contact" class="nav-link text-[13px] xl:text-[14px] font-medium">Contact</a>
       </nav>
 
       <div class="hidden items-center gap-3 md:flex">
-        <a href="#dashboard" class="magnetic rounded-full border border-white/10 px-5 py-2.5 text-[14px] font-semibold text-white transition hover:bg-white/5"><span class="magnetic-text">View Work</span></a>
-        <a href="#contact" class="magnetic rounded-full px-5 py-2.5 text-[14px] font-semibold button-primary"><span class="magnetic-text">Book a Call</span></a>
+        <a href="#dashboard" class="magnetic rounded-full border border-white/10 px-4 xl:px-5 py-2 xl:py-2.5 text-[13px] xl:text-[14px] font-semibold text-white transition hover:bg-white/5"><span class="magnetic-text">View Work</span></a>
+        <a href="#contact" class="magnetic rounded-full px-4 xl:px-5 py-2 xl:py-2.5 text-[13px] xl:text-[14px] font-semibold button-primary"><span class="magnetic-text">Book a Call</span></a>
       </div>
 
       <button id="mobileMenuBtn" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white md:hidden" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
@@ -440,13 +435,16 @@
 
     <div id="mobileMenu" class="hidden border-t border-white/8 bg-[#0b0f14] md:hidden">
       <div class="mx-auto max-w-[1280px] px-6 py-5">
-        <div class="grid gap-3 text-[14px] font-medium">
-          <a href="#about" class="rounded-2xl px-4 py-3 hover:bg-white/5">About</a>
-          <a href="#competencies" class="rounded-2xl px-4 py-3 hover:bg-white/5">Capabilities</a>
-          <a href="#retainers" class="rounded-2xl px-4 py-3 hover:bg-white/5">Models</a>
-          <a href="#dashboard" class="rounded-2xl px-4 py-3 hover:bg-white/5">Dashboard</a>
-          <a href="#calculator" class="rounded-2xl px-4 py-3 hover:bg-white/5">Calculator</a>
-          <a href="#contact" class="rounded-2xl px-4 py-3 hover:bg-white/5">Contact</a>
+        <div class="grid gap-2 text-[14px] font-medium">
+          <a href="#about" class="rounded-2xl px-4 py-2.5 hover:bg-white/5">About</a>
+          <a href="#competencies" class="rounded-2xl px-4 py-2.5 hover:bg-white/5">Capabilities</a>
+          <a href="#case-studies" class="rounded-2xl px-4 py-2.5 hover:bg-white/5">Case Studies</a>
+          <a href="#retainers" class="rounded-2xl px-4 py-2.5 hover:bg-white/5">Models</a>
+          <a href="#dashboard" class="rounded-2xl px-4 py-2.5 hover:bg-white/5">Dashboard</a>
+          <a href="#tech-stack" class="rounded-2xl px-4 py-2.5 hover:bg-white/5">Tech Stack</a>
+          <a href="#sops" class="rounded-2xl px-4 py-2.5 hover:bg-white/5">SOPs</a>
+          <a href="#calculator" class="rounded-2xl px-4 py-2.5 hover:bg-white/5">Calculator</a>
+          <a href="#contact" class="rounded-2xl px-4 py-2.5 hover:bg-white/5">Contact</a>
         </div>
       </div>
     </div>
@@ -458,7 +456,7 @@
       <div class="absolute inset-x-0 top-0 h-px bg-white/10"></div>
       <div class="absolute inset-x-0 bottom-0 h-px bg-white/10"></div>
 
-      <div class="mx-auto grid max-w-[1280px] gap-16 px-6 py-20 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-28">
+      <div class="mx-auto grid max-w-[1280px] gap-16 px-6 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-28 items-center">
         <div class="relative z-10 flex flex-col justify-center">
           <div class="reveal stagger-1">
             <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-white/90 ring-1 ring-white/10">
@@ -467,7 +465,7 @@
             </span>
           </div>
 
-          <h1 class="reveal stagger-2 mt-6 max-w-4xl text-balance text-5xl leading-[0.92] tracking-display text-white sm:text-6xl lg:text-[84px] display">
+          <h1 class="reveal stagger-2 mt-6 max-w-4xl text-balance text-5xl leading-[0.92] tracking-display text-white sm:text-6xl lg:text-[80px] xl:text-[84px] display">
             Store Management, FBA/FBM Logistics Routing & Daily Operations.
           </h1>
 
@@ -476,7 +474,7 @@
           </p>
 
           <div class="reveal stagger-4 mt-9 flex flex-wrap gap-3">
-            <a href="https://calendly.com/shehrozbaloch228/30min" class="magnetic rounded-full px-6 py-3 text-[15px] font-semibold button-primary"><span class="magnetic-text">Book a Strategy Call</span></a>
+            <a href="https://calendly.com/shehrozbaloch228/30min" target="_blank" rel="noopener noreferrer" class="magnetic rounded-full px-6 py-3 text-[15px] font-semibold button-primary"><span class="magnetic-text">Book a Strategy Call</span></a>
             <a href="#dashboard" class="magnetic rounded-full border border-white/12 px-6 py-3 text-[15px] font-semibold text-white transition hover:bg-white/6"><span class="magnetic-text">Explore the Dashboard</span></a>
           </div>
 
@@ -487,11 +485,11 @@
           </div>
         </div>
 
-        <div class="relative z-10" style="perspective:1000px;">
-          <div class="relative mx-auto min-h-[680px] max-w-[680px]">
-            <div class="absolute inset-0 rounded-[36px] border border-white/10 bg-white/3 blur-3xl opacity-40 animate-gridGlow"></div>
+        <div class="relative z-10 w-full" style="perspective:1000px;">
+          <div class="relative mx-auto max-w-[680px] w-full flex flex-col lg:block">
+            <div class="absolute inset-0 rounded-[36px] border border-white/10 bg-white/3 blur-3xl opacity-40 animate-gridGlow hidden lg:block"></div>
 
-            <div class="absolute left-0 top-8 h-[560px] w-[560px] rounded-[36px] glass-card animated-border reveal stagger-2 hover-lift animate-cardDrift">
+            <div class="relative lg:absolute lg:left-0 lg:top-8 lg:w-[540px] xl:w-[560px] rounded-[36px] glass-card animated-border reveal stagger-2 hover-lift animate-cardDrift max-lg:!relative max-lg:!inset-auto max-lg:!w-full max-lg:!transform-none max-lg:!my-4">
               <div class="flex items-center justify-between border-b border-white/8 px-6 py-5">
                 <div>
                   <div class="text-[12px] font-semibold uppercase tracking-[0.14em] text-white/50">Operational Performance</div>
@@ -507,17 +505,17 @@
                 <div class="grid grid-cols-3 gap-4">
                   <div class="rounded-3xl border border-white/8 bg-white/5 p-4 backdrop-blur-xl">
                     <div class="text-[12px] text-white/52">Stores Managed</div>
-                    <div class="counter mt-2 text-[26px] font-semibold tracking-[-0.04em] text-white">40+</div>
+                    <div class="counter mt-2 text-[24px] xl:text-[26px] font-semibold tracking-[-0.04em] text-white">40+</div>
                     <div class="mt-2 text-[12px] text-success">Active US Brands</div>
                   </div>
                   <div class="rounded-3xl border border-white/8 bg-white/5 p-4 backdrop-blur-xl">
                     <div class="text-[12px] text-white/52">Account Health</div>
-                    <div class="counter mt-2 text-[26px] font-semibold tracking-[-0.04em] text-white">100%</div>
+                    <div class="counter mt-2 text-[24px] xl:text-[26px] font-semibold tracking-[-0.04em] text-white">100%</div>
                     <div class="mt-2 text-[12px] text-success">Zero Suppressions</div>
                   </div>
                   <div class="rounded-3xl border border-white/8 bg-white/5 p-4 backdrop-blur-xl">
                     <div class="text-[12px] text-white/52">Years as VA</div>
-                    <div class="counter mt-2 text-[26px] font-semibold tracking-[-0.04em] text-white">6+</div>
+                    <div class="counter mt-2 text-[24px] xl:text-[26px] font-semibold tracking-[-0.04em] text-white">6+</div>
                     <div class="mt-2 text-[12px] text-white/52">Operational depth</div>
                   </div>
                 </div>
@@ -569,44 +567,45 @@
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div class="absolute right-0 top-28 z-30 w-[292px] rounded-[28px] border border-white/10 bg-gradient-to-b from-white/10 to-white/4 p-5 shadow-glass backdrop-blur-3xl reveal stagger-3 hover-lift animate-floatY lg:-right-12 lg:top-36">
-                <div class="flex items-center justify-between">
-                  <div class="text-[12px] uppercase tracking-[0.14em] text-white/45">Monthly Operations</div>
-                  <span class="rounded-full bg-success/10 px-3 py-1 text-[12px] font-semibold text-success">Flawless</span>
-                </div>
-                <div class="counter mt-4 text-[30px] font-semibold tracking-[-0.04em] text-white">450+ Tasks</div>
-                <div class="mt-4 flex items-end gap-2">
-                  <div class="h-10 w-3 rounded-full bg-white/8"></div><div class="h-16 w-3 rounded-full bg-white/8"></div><div class="h-20 w-3 rounded-full bg-primary"></div><div class="h-14 w-3 rounded-full bg-white/8"></div><div class="h-24 w-3 rounded-full bg-success"></div><div class="h-18 w-3 rounded-full bg-white/8"></div><div class="h-28 w-3 rounded-full bg-primary"></div>
-                </div>
-                <p class="mt-4 text-[12px] leading-6 text-white/50">Systematic execution across daily checks, case handling, replenishment routing, and SKU-level defense.</p>
+            <div class="relative lg:absolute lg:-right-[clamp(1rem,4vw,3rem)] lg:top-36 z-30 w-full lg:w-[292px] rounded-[28px] border border-white/10 bg-gradient-to-b from-white/10 to-white/4 p-5 shadow-glass backdrop-blur-3xl reveal stagger-3 hover-lift animate-floatY max-lg:!relative max-lg:!inset-auto max-lg:!w-full max-lg:!transform-none max-lg:!my-4">
+              <div class="flex items-center justify-between">
+                <div class="text-[12px] uppercase tracking-[0.14em] text-white/45">Monthly Operations</div>
+                <span class="rounded-full bg-success/10 px-3 py-1 text-[12px] font-semibold text-success">Flawless</span>
               </div>
+              <div class="counter mt-4 text-[30px] font-semibold tracking-[-0.04em] text-white">450+ Tasks</div>
+              <div class="mt-4 flex items-end gap-2">
+                <div class="h-10 w-3 rounded-full bg-white/8"></div><div class="h-16 w-3 rounded-full bg-white/8"></div><div class="h-20 w-3 rounded-full bg-primary"></div><div class="h-14 w-3 rounded-full bg-white/8"></div><div class="h-24 w-3 rounded-full bg-success"></div><div class="h-18 w-3 rounded-full bg-white/8"></div><div class="h-28 w-3 rounded-full bg-primary"></div>
+              </div>
+              <p class="mt-4 text-[12px] leading-6 text-white/50">Systematic execution across daily checks, case handling, replenishment routing, and SKU-level defense.</p>
+            </div>
 
-              <div class="absolute bottom-6 left-16 z-30 w-[340px] rounded-[28px] border border-white/10 bg-gradient-to-b from-white/10 to-white/4 p-5 shadow-glass backdrop-blur-3xl reveal stagger-4 hover-lift animate-floatX lg:-left-8 lg:bottom-4">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M6 13.5L10 17.5L18 8.5" stroke="#00B37E" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="text-[12px] uppercase tracking-[0.14em] text-white/45">Operational OS</div>
-                    <div class="mt-1 text-[15px] font-semibold text-white">Daily virtual assistant workflows</div>
-                  </div>
+            <div class="relative lg:absolute lg:-left-[clamp(1rem,4vw,2.5rem)] lg:bottom-4 z-30 w-full lg:w-[340px] rounded-[28px] border border-white/10 bg-gradient-to-b from-white/10 to-white/4 p-5 shadow-glass backdrop-blur-3xl reveal stagger-4 hover-lift animate-floatX max-lg:!relative max-lg:!inset-auto max-lg:!w-full max-lg:!transform-none max-lg:!my-4">
+              <div class="flex items-center gap-3">
+                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 13.5L10 17.5L18 8.5" stroke="#00B37E" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
                 </div>
-                <div class="mt-4 grid grid-cols-3 gap-3">
-                  <div class="rounded-2xl border border-white/8 bg-white/5 p-3">
-                    <div class="text-[11px] text-white/45">Catalog</div><div class="mt-2 text-[16px] font-semibold text-white">Clean</div>
-                  </div>
-                  <div class="rounded-2xl border border-white/8 bg-white/5 p-3">
-                    <div class="text-[11px] text-white/45">Logistics</div><div class="mt-2 text-[16px] font-semibold text-success">Routed</div>
-                  </div>
-                  <div class="rounded-2xl border border-white/8 bg-white/5 p-3">
-                    <div class="text-[11px] text-white/45">Buy-Box</div><div class="mt-2 text-[16px] font-semibold text-danger">Protected</div>
-                  </div>
+                <div>
+                  <div class="text-[12px] uppercase tracking-[0.14em] text-white/45">Operational OS</div>
+                  <div class="mt-1 text-[15px] font-semibold text-white">Daily virtual assistant workflows</div>
+                </div>
+              </div>
+              <div class="mt-4 grid grid-cols-3 gap-3">
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-3">
+                  <div class="text-[11px] text-white/45">Catalog</div><div class="mt-2 text-[16px] font-semibold text-white">Clean</div>
+                </div>
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-3">
+                  <div class="text-[11px] text-white/45">Logistics</div><div class="mt-2 text-[16px] font-semibold text-success">Routed</div>
+                </div>
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-3">
+                  <div class="text-[11px] text-white/45">Buy-Box</div><div class="mt-2 text-[16px] font-semibold text-danger">Protected</div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -704,6 +703,127 @@
               <span class="tech-pill rounded-full px-3 py-1.5 text-[12px] font-semibold text-white">A+ content updates</span>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="case-studies" class="section-pad bg-[#0D1016] border-t border-white/8">
+      <div class="mx-auto max-w-[1280px] px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal">
+          <div class="max-w-2xl">
+            <span class="text-[12px] font-semibold uppercase tracking-[0.14em] text-primary">Forensic Interventions</span>
+            <h2 class="display mt-4 text-4xl leading-[1.02] text-white lg:text-[48px]">Realized Operational Yields & Catalog Corrections.</h2>
+            <p class="mt-4 text-[17px] leading-relaxed text-white/68">Explore verifiable case studies demonstrating rigorous stranded capital recovery, organic search ranking acceleration, and margin-defensive PPC rebalancing.</p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 p-1.5 bg-panel rounded-2xl border border-white/10 self-start">
+            <button type="button" class="case-tab active px-4 py-2 rounded-xl text-[13px] font-bold transition-all duration-200 bg-primary text-white shadow-md border border-primary/40" data-filter="all">All Lanes</button>
+            <button type="button" class="case-tab px-4 py-2 rounded-xl text-[13px] font-bold transition-all duration-200 bg-transparent text-white/60 hover:text-white border border-transparent" data-filter="defense">Catalog Defense</button>
+            <button type="button" class="case-tab px-4 py-2 rounded-xl text-[13px] font-bold transition-all duration-200 bg-transparent text-white/60 hover:text-white border border-transparent" data-filter="routing">Logistics Routing</button>
+          </div>
+        </div>
+
+        <div id="caseGrid" class="mt-14 grid gap-8 lg:grid-cols-3 items-stretch">
+          
+          <article class="case-card reveal stagger-1 rounded-[32px] border border-white/10 bg-gradient-to-b from-white/6 to-white/2 p-8 shadow-premium flex flex-col justify-between transition-all duration-300 hover-lift" data-category="routing">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest text-primary border border-primary/20">Logistics Routing</span>
+                <span class="text-[13px] font-mono text-white/40">ASIN: B08X...9Q</span>
+              </div>
+
+              <h3 class="display-h3 mt-6 text-[22px] font-bold text-white">Stranded Capital Recovery</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-white/70">
+                A top-tier home goods brand suffered from 1,400+ units locked in un-routable FC hazmat processing and un-reimbursed carrier lost shipments.
+              </p>
+
+              <div class="mt-6 p-4 rounded-2xl bg-[#0b0f14] border border-white/8 space-y-3">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-white/50">Capital Unlocked</span>
+                  <span class="font-mono font-bold text-success">+$42,450.00</span>
+                </div>
+                <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+                  <div class="bg-success h-full w-[94%] rounded-full"></div>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-white/40 font-mono">
+                  <span>Day 1: Locked</span>
+                  <span>Day 14: Fully Recovered</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/8 flex items-center justify-between text-xs font-semibold text-white/60">
+              <span>Method: Forensic Inbound Reconcile</span>
+              <span class="text-primary font-mono">100% Win Rate</span>
+            </div>
+          </article>
+
+          <article class="case-card reveal stagger-2 rounded-[32px] border border-white/10 bg-gradient-to-b from-white/6 to-white/2 p-8 shadow-premium flex flex-col justify-between transition-all duration-300 hover-lift" data-category="defense">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="rounded-full bg-primary2/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest text-primary2 border border-primary2/20">Catalog Defense</span>
+                <span class="text-[13px] font-mono text-white/40">ASIN: B07J...2M</span>
+              </div>
+
+              <h3 class="display-h3 mt-6 text-[22px] font-bold text-white">Organic BSR Velocity</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-white/70">
+                Resolved broken parent-child variation node syntax that fragmented organic reviews and caused sudden Amazon search index suppression.
+              </p>
+
+              <div class="mt-6 p-4 rounded-2xl bg-[#0b0f14] border border-white/8 space-y-3">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-white/50">Organic Rank BSR Jump</span>
+                  <span class="font-mono font-bold text-primary2">#410 → #12 BSR</span>
+                </div>
+                <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+                  <div class="bg-primary2 h-full w-[88%] rounded-full"></div>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-white/40 font-mono">
+                  <span>Suppressed</span>
+                  <span>Page 1 Index</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/8 flex items-center justify-between text-xs font-semibold text-white/60">
+              <span>Method: Flat-File XML Override</span>
+              <span class="text-primary2 font-mono">+64% Organic Sales</span>
+            </div>
+          </article>
+
+          <article class="case-card reveal stagger-3 rounded-[32px] border border-white/10 bg-gradient-to-b from-white/6 to-white/2 p-8 shadow-premium flex flex-col justify-between transition-all duration-300 hover-lift" data-category="defense">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="rounded-full bg-success/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest text-success border border-success/20">Catalog Defense</span>
+                <span class="text-[13px] font-mono text-white/40">ASIN: B09W...8K</span>
+              </div>
+
+              <h3 class="display-h3 mt-6 text-[22px] font-bold text-white">PPC vs. Organic Rebalancing</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-white/70">
+                Eliminated excessive PPC dependency on cannibalized exact-match terms while defending the Buy-Box against rogue third-party map violators.
+              </p>
+
+              <div class="mt-6 p-4 rounded-2xl bg-[#0b0f14] border border-white/8 space-y-3">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-white/50">TACOS Margin Expansion</span>
+                  <span class="font-mono font-bold text-success">22.4% → 9.1%</span>
+                </div>
+                <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+                  <div class="bg-success h-full w-[82%] rounded-full"></div>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-white/40 font-mono">
+                  <span>High Blended ACOS</span>
+                  <span>Pure Profit Yield</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/8 flex items-center justify-between text-xs font-semibold text-white/60">
+              <span>Method: Buy-Box Exclusivity Lock</span>
+              <span class="text-success font-mono">Margin Defended</span>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
@@ -988,7 +1108,14 @@
             <h2 class="display mt-5 text-4xl leading-[1.02] text-white lg:text-[54px]">A dedicated, operationally rigorous Amazon VA partner for brands scaling FBA and FBM.</h2>
             <p class="mt-5 max-w-xl text-[18px] leading-8 text-white/68">I combine extensive marketplace expertise with hands-on daily execution to optimize listings, route logistics, and eliminate Seller Central friction. Built for brand owners who require reliable operational management without agency overhead.</p>
 
-            <div class="mt-8 grid gap-4">
+            <div class="mt-8 pt-4">
+              <button type="button" id="btnOpenEod" class="magnetic rounded-2xl bg-gradient-to-r from-primary to-primary2 px-7 py-4 text-[15px] font-extrabold text-white shadow-glow transition duration-300 hover:scale-[1.02] flex items-center gap-3">
+                <svg class="w-5 h-5 animate-slowRotate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span class="magnetic-text">Preview Daily Handoff Protocol (EOD Report)</span>
+              </button>
+            </div>
+
+            <div class="mt-10 grid gap-4">
               <div class="rounded-3xl border border-white/8 bg-white/5 p-5 shadow-premiumSoft animated-border">
                 <div class="text-[12px] font-semibold uppercase tracking-[0.14em] text-white/45">Store Management Rigor</div>
                 <div class="mt-2 text-[18px] font-semibold tracking-[-0.03em] text-white display-h3">Every daily task is executed to maintain flawless catalog health and listing compliance.</div>
@@ -1068,7 +1195,7 @@
           <p class="mt-5 max-w-2xl text-[18px] leading-[1.75] text-white/68">I operate inside the industry's most rigorous analytical, logistical, and accounting software environments. All workflows integrate natively with your existing subscription seats.</p>
         </div>
 
-        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
           <div class="group rounded-3xl border border-white/10 bg-white/3 p-6 shadow-glass backdrop-blur-xl transition duration-300 hover:border-primary/40 hover:bg-white/5 flex flex-col justify-between h-44">
             <div class="flex items-center justify-between">
               <span class="text-[12px] font-mono text-white/40 uppercase tracking-widest">Platform Hub</span>
@@ -1200,6 +1327,92 @@
       </div>
     </section>
 
+    <section id="sops" class="section-pad bg-[#0b0f14] border-t border-white/8">
+      <div class="mx-auto max-w-[1280px] px-6 lg:px-8">
+        <div class="max-w-3xl reveal">
+          <span class="text-[12px] font-semibold uppercase tracking-[0.14em] text-primary">Execution Protocols</span>
+          <h2 class="display mt-4 text-4xl leading-[1.02] text-white lg:text-[48px]">Standard Operating Procedures (SOP & SLA Accordion).</h2>
+          <p class="mt-4 text-[17px] leading-relaxed text-white/68">Every daily virtual assistant function is governed by strict, unyielding operational checklists. Click any protocol below to inspect the step-by-step execution methodology.</p>
+        </div>
+
+        <div id="sopAccordion" class="mt-14 space-y-4 max-w-4xl reveal">
+          
+          <div class="sop-item rounded-3xl border border-white/10 bg-white/3 overflow-hidden transition-all duration-300">
+            <button type="button" class="sop-trigger w-full p-6 sm:p-7 text-left flex items-center justify-between font-bold text-lg text-white hover:bg-white/5 transition">
+              <span class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-primary flex-shrink-0"></span>
+                08:00 AM Central Hijacker Sweeps & Buy-Box Defense
+              </span>
+              <svg class="w-5 h-5 transition-transform duration-300 sop-chevron text-white/60 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="sop-content max-h-0 overflow-hidden transition-all duration-300">
+              <div class="p-6 sm:p-7 pt-0 text-white/70 border-t border-white/5 space-y-3 text-[15px] leading-relaxed">
+                <p class="font-semibold text-white">Execution Frequency: Every Morning at 08:00 AM CST precisely.</p>
+                <p>1. Open Brand Registry Infringement portal and scan all active US catalog ASINs for unauthorized piggybackers or malicious offer duplications.</p>
+                <p>2. Cross-reference unauthorized seller IDs against verified distributor MAP agreements.</p>
+                <p>3. Dispatch automated Cease & Desist legal warnings via Amazon Buyer-Seller messaging; escalate persistent violators to Brand Registry test-buys within 4 hours.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sop-item rounded-3xl border border-white/10 bg-white/3 overflow-hidden transition-all duration-300">
+            <button type="button" class="sop-trigger w-full p-6 sm:p-7 text-left flex items-center justify-between font-bold text-lg text-white hover:bg-white/5 transition">
+              <span class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-primary flex-shrink-0"></span>
+                Bi-weekly FBA Inbound Reconcile & Shipment Audits
+              </span>
+              <svg class="w-5 h-5 transition-transform duration-300 sop-chevron text-white/60 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="sop-content max-h-0 overflow-hidden transition-all duration-300">
+              <div class="p-6 sm:p-7 pt-0 text-white/70 border-t border-white/5 space-y-3 text-[15px] leading-relaxed">
+                <p class="font-semibold text-white">Execution Frequency: Every 1st and 15th of the month.</p>
+                <p>1. Extract closed FBA shipment logs from Seller Central Fulfillment reports and compare 'Shipped' vs. 'Received' unit quantities.</p>
+                <p>2. Audit carrier proof of delivery (POD), stamped bills of lading (BOL), and commercial commercial invoices.</p>
+                <p>3. Open formal Seller Central reimbursement cases for all unit discrepancies; track Case IDs until cash or inventory credit posts to the ledger.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sop-item rounded-3xl border border-white/10 bg-white/3 overflow-hidden transition-all duration-300">
+            <button type="button" class="sop-trigger w-full p-6 sm:p-7 text-left flex items-center justify-between font-bold text-lg text-white hover:bg-white/5 transition">
+              <span class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-primary flex-shrink-0"></span>
+                A-to-Z Claim Representation & Account Health Defense
+              </span>
+              <svg class="w-5 h-5 transition-transform duration-300 sop-chevron text-white/60 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="sop-content max-h-0 overflow-hidden transition-all duration-300">
+              <div class="p-6 sm:p-7 pt-0 text-white/70 border-t border-white/5 space-y-3 text-[15px] leading-relaxed">
+                <p class="font-semibold text-white">Execution Frequency: Continuous Real-Time SLA (< 2 hour response).</p>
+                <p>1. Monitor Account Health Rating (AHR) dashboard for Order Defect Rate (ODR) spikes or immediate buyer claim submittals.</p>
+                <p>2. Compile carrier tracking logs, delivery GPS coordinates, and buyer communication history into bulleted defense templates.</p>
+                <p>3. Submit professional claim representations to Amazon policy teams to successfully defend seller funds and maintain a pristine 100% AHR score.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sop-item rounded-3xl border border-white/10 bg-white/3 overflow-hidden transition-all duration-300">
+            <button type="button" class="sop-trigger w-full p-6 sm:p-7 text-left flex items-center justify-between font-bold text-lg text-white hover:bg-white/5 transition">
+              <span class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-primary flex-shrink-0"></span>
+                Catalog Hygiene & Search Suppression Scrub
+              </span>
+              <svg class="w-5 h-5 transition-transform duration-300 sop-chevron text-white/60 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="sop-content max-h-0 overflow-hidden transition-all duration-300">
+              <div class="p-6 sm:p-7 pt-0 text-white/70 border-t border-white/5 space-y-3 text-[15px] leading-relaxed">
+                <p class="font-semibold text-white">Execution Frequency: Weekly on Monday Afternoons.</p>
+                <p>1. Download Stranded Inventory reports and Fix Your Products (FYP) suppression logs.</p>
+                <p>2. Re-link disconnected SKU attributes, correct missing bullet points, and re-upload compliant 1000x1000px main white-background images.</p>
+                <p>3. Validate that 100% of brand ASINs are actively indexable across U.S. customer postal codes.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <section id="calculator" class="section-pad bg-[#0b0f14] border-t border-white/8">
       <div class="mx-auto max-w-[1280px] px-6 lg:px-8">
         <div class="max-w-3xl reveal">
@@ -1210,21 +1423,21 @@
 
         <div class="mt-16 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
           <div class="reveal rounded-[32px] border border-white/10 bg-panel p-8 lg:p-10 shadow-premium">
-            <div class="flex items-center justify-between border-b border-white/8 pb-6 mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/8 pb-6 mb-8 gap-4">
               <div>
                 <span class="text-[12px] font-semibold uppercase tracking-widest text-white/40">Logistics Routing</span>
                 <h3 class="text-xl font-bold text-white display-h3 mt-1">Fulfillment Channel Parameters</h3>
               </div>
               
-              <div class="flex rounded-xl bg-white/5 p-1 border border-white/10">
-                <label class="cursor-pointer rounded-lg px-4 py-2 text-[13px] font-semibold transition-all flex items-center gap-2 select-none" id="lblFba">
+              <div class="flex rounded-2xl bg-white/5 p-1.5 border border-white/10 self-start sm:self-auto">
+                <label class="cursor-pointer rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-200 flex items-center gap-2 select-none bg-white/10 border border-primary/40 shadow-md text-white" id="lblFba">
                   <input type="radio" name="routingType" id="calcTypeFba" checked class="hidden" />
-                  <span class="w-2 h-2 rounded-full bg-primary indicator"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-primary indicator"></span>
                   FBA Routing
                 </label>
-                <label class="cursor-pointer rounded-lg px-4 py-2 text-[13px] font-semibold transition-all flex items-center gap-2 select-none text-white/60" id="lblFbm">
+                <label class="cursor-pointer rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-200 flex items-center gap-2 select-none bg-transparent border border-transparent text-white/60 hover:text-white" id="lblFbm">
                   <input type="radio" name="routingType" id="calcTypeFbm" class="hidden" />
-                  <span class="w-2 h-2 rounded-full bg-transparent indicator"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-transparent indicator"></span>
                   FBM Merchant
                 </label>
               </div>
@@ -1426,13 +1639,15 @@
 
           <div class="reveal">
             <div class="text-[12px] font-semibold uppercase tracking-[0.14em] text-white/45">Navigation</div>
-            <div class="mt-5 grid gap-3 text-[14px]">
+            <div class="mt-5 grid gap-2.5 text-[14px]">
               <a href="#about" class="w-fit text-white/80 hover:text-primary">About</a>
               <a href="#competencies" class="w-fit text-white/80 hover:text-primary">Capabilities</a>
+              <a href="#case-studies" class="w-fit text-white/80 hover:text-primary">Case Studies</a>
               <a href="#retainers" class="w-fit text-white/80 hover:text-primary">Models</a>
               <a href="#dashboard" class="w-fit text-white/80 hover:text-primary">Dashboard</a>
+              <a href="#tech-stack" class="w-fit text-white/80 hover:text-primary">Tech Stack</a>
+              <a href="#sops" class="w-fit text-white/80 hover:text-primary">SOPs</a>
               <a href="#calculator" class="w-fit text-white/80 hover:text-primary">Calculator</a>
-              <a href="#contact" class="w-fit text-white/80 hover:text-primary">Contact</a>
             </div>
           </div>
 
@@ -1473,6 +1688,115 @@
       </div>
     </footer>
   </main>
+
+  <div id="eodModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-8 bg-black/85 backdrop-blur-2xl transition-all duration-300 opacity-0">
+    <div class="relative w-full max-w-4xl rounded-[32px] border border-white/15 bg-panel p-6 sm:p-8 shadow-modal text-white overflow-hidden max-h-[90vh] flex flex-col animate-revealScale">
+      
+      <div class="flex items-center justify-between border-b border-white/10 pb-5">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 rounded-full bg-success animate-pulseSoft"></div>
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold display-h3 text-white">Simulated End-of-Day (EOD) VA Handoff Protocol</h3>
+            <span class="text-xs font-mono text-white/50">Delivered via Slack #operations-handoff at 05:00 PM CST</span>
+          </div>
+        </div>
+        <button type="button" id="btnCloseEod" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="flex gap-2 border-b border-white/8 pt-4 pb-3">
+        <button type="button" class="eod-tab active px-4 py-2 rounded-xl text-xs font-bold transition bg-primary text-white" data-target="summary">Executive Handoff</button>
+        <button type="button" class="eod-tab px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-white/60 hover:text-white" data-target="asin">ASIN Health Logs</button>
+        <button type="button" class="eod-tab px-4 py-2 rounded-xl text-xs font-bold transition bg-white/5 text-white/60 hover:text-white" data-target="replenish">24-Hour Routing Targets</button>
+      </div>
+
+      <div class="overflow-y-auto pr-2 mt-5 space-y-6 flex-1 text-[14px] leading-relaxed text-white/80">
+        
+        <div id="eod-summary" class="eod-pane space-y-4">
+          <div class="p-4 rounded-2xl bg-[#0b0f14] border border-white/8 flex items-center justify-between">
+            <span class="font-mono text-xs text-primary">Status: Flawless Execution</span>
+            <span class="font-mono text-xs text-white/50">42 ASINs Checked • 0 Suppressions</span>
+          </div>
+          <p>
+            Good evening team. All vital daily checks and catalog sweeps have been executed across the U.S. Seller Central hub. We successfully defended the Buy-Box across all core parent nodes and audited upcoming FBA replenishment buffers.
+          </p>
+          <div class="space-y-2">
+            <h4 class="font-bold text-white">Key Operator Highlights today:</h4>
+            <ul class="list-disc pl-5 space-y-1 text-white/70">
+              <li>Dispatched automated C&D warnings to 2 rogue unauthorized piggybackers on SKU <span class="font-mono text-white">HG-992-BLK</span>; one has already retreated.</li>
+              <li>Reconciled FBA Shipment <span class="font-mono text-white">FBA15Z...89</span>; successfully recovered $1,420.00 in missing unit credits.</li>
+              <li>Submitted A-to-Z claim representation for Order <span class="font-mono text-white">114-8832...</span> with complete GPS delivery verification logs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="eod-asin" class="eod-pane hidden space-y-4">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-white/10 text-xs font-mono text-white/50">
+                  <th class="py-2">SKU / ASIN</th>
+                  <th class="py-2">Buy-Box %</th>
+                  <th class="py-2">Suppression Risk</th>
+                  <th class="py-2">Action Taken</th>
+                </tr>
+              </thead>
+              <tbody class="font-mono text-xs divide-y divide-white/5">
+                <tr>
+                  <td class="py-3 text-white font-bold">HG-992-BLK</td>
+                  <td class="py-3 text-success font-bold">100%</td>
+                  <td class="py-3 text-success">Zero</td>
+                  <td class="py-3 text-white/70">Pricing parity lock enforced</td>
+                </tr>
+                <tr>
+                  <td class="py-3 text-white font-bold">KT-104-SLV</td>
+                  <td class="py-3 text-primary2 font-bold">94%</td>
+                  <td class="py-3 text-success">Zero</td>
+                  <td class="py-3 text-white/70">Scrubbed missing XML bullets</td>
+                </tr>
+                <tr>
+                  <td class="py-3 text-white font-bold">BD-409-QUN</td>
+                  <td class="py-3 text-danger font-bold">82% (Hijacked)</td>
+                  <td class="py-3 text-danger">Active 3P</td>
+                  <td class="py-3 text-white">C&D sent • Infringement logged</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="eod-replenish" class="eod-pane hidden space-y-4">
+          <p class="text-white/70">
+            The following inventory windows require procurement approval within the next 24 to 48 hours to prevent organic velocity stockouts:
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/8 space-y-2">
+              <div class="flex justify-between font-mono text-xs">
+                <span class="text-white font-bold">KT-104-SLV</span>
+                <span class="text-warning">18 Days of Supply</span>
+              </div>
+              <p class="text-xs text-white/60">Velocity spiking +24% WoW. Recommended Inbound Creation: 600 Units FBA.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/8 space-y-2">
+              <div class="flex justify-between font-mono text-xs">
+                <span class="text-white font-bold">HG-992-BLK</span>
+                <span class="text-success">44 Days of Supply</span>
+              </div>
+              <p class="text-xs text-white/60">Buffer perfectly balanced. Next reorder review scheduled for Day 30.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-white/10 pt-4 mt-6 flex items-center justify-between text-xs text-white/50">
+        <span>Operator Log ID: <span class="font-mono text-white">SW-2026-0625</span></span>
+        <button type="button" class="text-primary hover:underline" id="btnModalAcknowledge">Acknowledge EOD Handoff</button>
+      </div>
+
+    </div>
+  </div>
 
   <script>
     // Copyright Year Auto-fill
@@ -1557,7 +1881,7 @@
       if (bodyFlash) bodyFlash.style.opacity = '1';
     });
 
-    // VA Operations Workflow Ledger Ledger Mapping
+    // VA Operations Workflow Ledger Mapping
     const workflowData = {
       buybox: {
         title: 'Buy-Box Win Rate',
@@ -1656,6 +1980,121 @@
 
     rows.forEach((row) => row.addEventListener('click', () => setWorkflow(row.dataset.key)));
 
+    // Invoke setWorkflow('buybox') autonomously upon DOM Load
+    window.addEventListener('DOMContentLoaded', () => {
+      setWorkflow('buybox');
+    });
+
+    // Case Studies Tab Filtering Logic (Vanilla JS)
+    const caseTabs = document.querySelectorAll('.case-tab');
+    const caseCards = document.querySelectorAll('.case-card');
+
+    caseTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        caseTabs.forEach(t => {
+          t.classList.remove('active', 'bg-primary', 'text-white', 'shadow-md', 'border-primary/40');
+          t.classList.add('bg-transparent', 'text-white/60', 'border-transparent');
+        });
+        tab.classList.add('active', 'bg-primary', 'text-white', 'shadow-md', 'border-primary/40');
+        tab.classList.remove('bg-transparent', 'text-white/60', 'border-transparent');
+
+        const filter = tab.dataset.filter;
+        caseCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+            setTimeout(() => card.style.opacity = '1', 50);
+          } else {
+            card.style.opacity = '0';
+            setTimeout(() => card.style.display = 'none', 150);
+          }
+        });
+      });
+    });
+
+    // Standard Operating Procedures Accordion Expansion Logic (scrollHeight)
+    const sopTriggers = document.querySelectorAll('.sop-trigger');
+    sopTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.parentElement;
+        const content = item.querySelector('.sop-content');
+        const chevron = trigger.querySelector('.sop-chevron');
+        const isExpanded = item.classList.contains('expanded');
+
+        if (!isExpanded) {
+          item.classList.add('expanded', 'border-primary/40', 'bg-white/5');
+          content.style.maxHeight = content.scrollHeight + 40 + "px";
+          if (chevron) chevron.style.transform = "rotate(180deg)";
+        } else {
+          item.classList.remove('expanded', 'border-primary/40', 'bg-white/5');
+          content.style.maxHeight = "0px";
+          if (chevron) chevron.style.transform = "rotate(0deg)";
+        }
+      });
+    });
+
+    // Interactive EOD Report Modal Overlay Trigger & Panel Logic
+    const eodModal = document.getElementById('eodModal');
+    const btnOpenEod = document.getElementById('btnOpenEod');
+    const btnCloseEod = document.getElementById('btnCloseEod');
+    const btnModalAcknowledge = document.getElementById('btnModalAcknowledge');
+    const eodTabs = document.querySelectorAll('.eod-tab');
+    const eodPanes = document.querySelectorAll('.eod-pane');
+
+    function openEodModal() {
+      if (!eodModal) return;
+      eodModal.classList.remove('hidden');
+      eodModal.classList.add('flex');
+      setTimeout(() => eodModal.style.opacity = '1', 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEodModal() {
+      if (!eodModal) return;
+      eodModal.style.opacity = '0';
+      setTimeout(() => {
+        eodModal.classList.add('hidden');
+        eodModal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    if (btnOpenEod) btnOpenEod.addEventListener('click', openEodModal);
+    if (btnCloseEod) btnCloseEod.addEventListener('click', closeEodModal);
+    if (btnModalAcknowledge) {
+      btnModalAcknowledge.addEventListener('click', () => {
+        btnModalAcknowledge.textContent = "✓ Acknowledged";
+        btnModalAcknowledge.className = "text-success font-bold font-mono";
+        setTimeout(closeEodModal, 600);
+      });
+    }
+
+    eodTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        eodTabs.forEach(t => t.classList.replace('bg-primary', 'bg-white/5'));
+        eodTabs.forEach(t => t.classList.replace('text-white', 'text-white/60'));
+        tab.classList.replace('bg-white/5', 'bg-primary');
+        tab.classList.replace('text-white/60', 'text-white');
+
+        const target = tab.dataset.target;
+        eodPanes.forEach(pane => {
+          if (pane.id === `eod-${target}`) {
+            pane.classList.remove('hidden');
+          } else {
+            pane.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeEodModal();
+    });
+    if (eodModal) {
+      eodModal.addEventListener('click', (e) => {
+        if (e.target === eodModal) closeEodModal();
+      });
+    }
+
     // Newsletter Submittal Override
     const subForm = document.getElementById('subscribeForm');
     const subMsg = document.getElementById('subMsg');
@@ -1748,21 +2187,19 @@
       valPrice.textContent = price.toFixed(2);
       valUnits.textContent = units.toLocaleString();
 
-      // UI Indicator switches
+      // Tactile High-Contrast Background Feedback
       if(isFba) {
-        lblFba.classList.remove('text-white/60');
-        lblFba.classList.add('text-white');
-        lblFba.querySelector('.indicator').classList.replace('bg-transparent', 'bg-primary');
-        lblFbm.classList.add('text-white/60');
-        lblFbm.classList.remove('text-white');
-        lblFbm.querySelector('.indicator').classList.replace('bg-primary', 'bg-transparent');
+        lblFba.className = "cursor-pointer rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-200 flex items-center gap-2 select-none bg-white/10 border border-primary/40 shadow-md text-white";
+        lblFba.querySelector('.indicator').className = "w-2.5 h-2.5 rounded-full bg-primary indicator";
+        
+        lblFbm.className = "cursor-pointer rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-200 flex items-center gap-2 select-none bg-transparent border border-transparent text-white/60 hover:text-white";
+        lblFbm.querySelector('.indicator').className = "w-2.5 h-2.5 rounded-full bg-transparent indicator";
       } else {
-        lblFbm.classList.remove('text-white/60');
-        lblFbm.classList.add('text-white');
-        lblFbm.querySelector('.indicator').classList.replace('bg-transparent', 'bg-primary');
-        lblFba.classList.add('text-white/60');
-        lblFba.classList.remove('text-white');
-        lblFba.querySelector('.indicator').classList.replace('bg-primary', 'bg-transparent');
+        lblFbm.className = "cursor-pointer rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-200 flex items-center gap-2 select-none bg-white/10 border border-primary/40 shadow-md text-white";
+        lblFbm.querySelector('.indicator').className = "w-2.5 h-2.5 rounded-full bg-primary indicator";
+        
+        lblFba.className = "cursor-pointer rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-200 flex items-center gap-2 select-none bg-transparent border border-transparent text-white/60 hover:text-white";
+        lblFba.querySelector('.indicator').className = "w-2.5 h-2.5 rounded-full bg-transparent indicator";
       }
 
       // Mathematical Execution
@@ -1771,11 +2208,10 @@
 
       if(isFba) {
         labelFulfillment.textContent = "FBA Pick/Pack Fee Tier";
-        // Realistic dimensional pick/pack weight tier modeling
         fulfillmentFee = Math.max(3.22, price * 0.14);
       } else {
         labelFulfillment.textContent = "Est. FBM Carrier Ground S&H";
-        fulfillmentFee = 4.85; // Standard merchant commercial carrier baseline
+        fulfillmentFee = 4.85; 
       }
 
       const netMarginDollar = price - cost - referralFee - fulfillmentFee;
@@ -1811,7 +2247,7 @@
       sliderUnits.addEventListener('input', runCalculator);
       calcTypeFba.addEventListener('change', runCalculator);
       calcTypeFbm.addEventListener('change', runCalculator);
-      runCalculator(); // Instant Trigger
+      runCalculator(); 
     }
   </script>
 </body>
